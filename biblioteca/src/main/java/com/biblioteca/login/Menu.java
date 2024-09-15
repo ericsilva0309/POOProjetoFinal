@@ -124,7 +124,7 @@ public class Menu {
             System.out.print("Cidade: ");
             String cidade = scanner.nextLine();
             System.out.print("Estado: ");
-            UnidadeFederal estado = UnidadeFederal.valueOf(scanner.nextLine().toUpperCase());
+            UnidadeFederal estado = UnidadeFederal.fromString(scanner.nextLine());
             System.out.print("CEP: ");
             String cep = scanner.nextLine();
             System.out.print("Referência: ");
@@ -147,14 +147,18 @@ public class Menu {
             endereco.setEstado(estado);
             endereco.setCep(cep);
             endereco.setReferencia(referencia);
-    
+
             Usuario usuario = new Usuario(nome, cpf, dataNascimento, endereco, email, telefone, login, senha);
             biblioteca.cadastrarUsuario(usuario);
-            pausar();
-        } catch (Exception e) {
-            System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
-        }
+            biblioteca.cadastrarUsuario(usuario);
+        System.out.println("Usuário cadastrado com sucesso.");
+    } catch (IllegalArgumentException e) {
+        System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+    } catch (Exception e) {
+        System.out.println("Erro inesperado: " + e.getMessage());
     }
+    pausar();
+}
 
     public void emprestarLivro() {
         System.out.println("=== Emprestar Livro ===");

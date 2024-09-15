@@ -38,6 +38,15 @@ public enum UnidadeFederal {
     RR("Roraima"),
     TO("Tocantins");
 
+    public static UnidadeFederal fromString(String estado) {
+        for (UnidadeFederal uf : UnidadeFederal.values()) {
+            if (uf.name().equalsIgnoreCase(estado)) {
+                return uf;
+            }
+        }
+        throw new IllegalArgumentException("Estado inválido: " + estado);
+    }
+
     private final String nomePorExtenso;
     
     UnidadeFederal(String nomePorExtenso) {
