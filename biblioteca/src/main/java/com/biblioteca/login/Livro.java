@@ -1,5 +1,8 @@
 package com.biblioteca.login;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +13,15 @@ public class Livro {
     private String categoria;
     private int ano;
     private boolean disponivel;
+    private List<Avaliacao> avaliacoes;
 
     public Livro(String titulo, String autor, String categoria, int ano) {
         this.titulo = titulo;
         this.autor = autor;
         this.categoria = categoria;
         this.ano = ano;
-        this.disponivel = true;  // Por padrão, o livro começa como disponível.
+        this.disponivel = true;
+        this.avaliacoes = new ArrayList<>();
     }
 
     // Getters e Setters
@@ -51,7 +56,16 @@ public class Livro {
         System.out.println("Categoria: " + categoria);
         System.out.println("Ano: " + ano);
         System.out.println("Disponível: " + (disponivel ? "Sim" : "Não"));
+        System.out.println("Avaliações:");
+        for (Avaliacao avaliacao : avaliacoes) {
+            System.out.println(avaliacao);
+        }
     }
+
+    public void adicionarAvaliacao(Avaliacao avaliacao) {
+        avaliacoes.add(avaliacao);
+    }
+    
     @Override
     public String toString() {
         return "Título: " + titulo + ", Autor: " + autor + ", Categoria: " + categoria + ", Ano: " + ano;

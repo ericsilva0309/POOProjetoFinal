@@ -32,7 +32,11 @@ public class Biblioteca {
             System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
         }
     }
-    
+
+    public void adicionarAvaliacao(Usuario usuario, Livro livro, int nota, String comentario) {
+        Avaliacao avaliacao = new Avaliacao(usuario, livro, nota, comentario);
+        livro.adicionarAvaliacao(avaliacao);
+    }
 
     // Método para emprestar um livro
     public void emprestarLivro(Usuario usuario, Livro livro) {

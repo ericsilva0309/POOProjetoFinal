@@ -29,6 +29,8 @@ public class Menu {
             System.out.println("5. Exibir Livros Disponíveis");
             System.out.println("6. Exibir Histórico de Empréstimos");
             System.out.println("7. Exibir Usuários");
+            System.out.println("8. Avaliar Livro");
+            System.out.println("9. Exibir Avaliações de Livro");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
@@ -57,6 +59,14 @@ public class Menu {
                     break;
                 case 7:
                     biblioteca.exibirUsuarios();
+                    pausar();
+                    break;
+                case 8:
+                    avaliarLivro();
+                    pausar();
+                    break;
+                case 9:
+                    exibirAvaliacoes();
                     pausar();
                     break;
                 case 0:
@@ -95,53 +105,53 @@ public class Menu {
     }
 
     public void cadastrarUsuario() {
-        try{
-        System.out.println("=== Cadastrar Usuário ===");
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine();
-        System.out.print("CPF: ");
-        String cpf = scanner.nextLine();
-        System.out.print("Data de Nascimento: ");
-        String dataNascimento = scanner.nextLine();
-        System.out.print("Logradouro: ");
-        String logradouro = scanner.nextLine();
-        System.out.print("Número: ");
-        String numero = scanner.nextLine();
-        System.out.print("Complemento: ");
-        String complemento = scanner.nextLine();
-        System.out.print("Bairro: ");
-        String bairro = scanner.nextLine();
-        System.out.print("Cidade: ");
-        String cidade = scanner.nextLine();
-        System.out.print("Estado: ");
-        UnidadeFederal estado = UnidadeFederal.valueOf(scanner.nextLine().toUpperCase());
-        System.out.print("CEP: ");
-        String cep = scanner.nextLine();
-        System.out.print("Referência: ");
-        String referencia = scanner.nextLine();
-        System.out.print("Email: ");
-        String email = scanner.nextLine();
-        System.out.print("Telefone: ");
-        String telefone = scanner.nextLine();
-        System.out.print("Login: ");
-        String login = scanner.nextLine();
-        System.out.print("Senha: ");
-        String senha = scanner.nextLine();
+        try {
+            System.out.println("=== Cadastrar Usuário ===");
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
+            System.out.print("CPF: ");
+            String cpf = scanner.nextLine();
+            System.out.print("Data de Nascimento: ");
+            String dataNascimento = scanner.nextLine();
+            System.out.print("Logradouro: ");
+            String logradouro = scanner.nextLine();
+            System.out.print("Número: ");
+            String numero = scanner.nextLine();
+            System.out.print("Complemento: ");
+            String complemento = scanner.nextLine();
+            System.out.print("Bairro: ");
+            String bairro = scanner.nextLine();
+            System.out.print("Cidade: ");
+            String cidade = scanner.nextLine();
+            System.out.print("Estado: ");
+            UnidadeFederal estado = UnidadeFederal.valueOf(scanner.nextLine().toUpperCase());
+            System.out.print("CEP: ");
+            String cep = scanner.nextLine();
+            System.out.print("Referência: ");
+            String referencia = scanner.nextLine();
+            System.out.print("Email: ");
+            String email = scanner.nextLine();
+            System.out.print("Telefone: ");
+            String telefone = scanner.nextLine();
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
     
-        Endereco endereco = new Endereco();
-        endereco.setLogradouro(logradouro);
-        endereco.setNumero(numero);
-        endereco.setComplemento(complemento);
-        endereco.setBairro(bairro);
-        endereco.setCidade(cidade);
-        endereco.setEstado(estado);
-        endereco.setCep(cep);
-        endereco.setReferencia(referencia);
+            Endereco endereco = new Endereco();
+            endereco.setLogradouro(logradouro);
+            endereco.setNumero(numero);
+            endereco.setComplemento(complemento);
+            endereco.setBairro(bairro);
+            endereco.setCidade(cidade);
+            endereco.setEstado(estado);
+            endereco.setCep(cep);
+            endereco.setReferencia(referencia);
     
-        Usuario usuario = new Usuario(nome, cpf, dataNascimento, endereco, email, telefone, login, senha);
-        biblioteca.cadastrarUsuario(usuario);
-        pausar();
-        }catch(Exception e) {
+            Usuario usuario = new Usuario(nome, cpf, dataNascimento, endereco, email, telefone, login, senha);
+            biblioteca.cadastrarUsuario(usuario);
+            pausar();
+        } catch (Exception e) {
             System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
         }
     }
@@ -192,6 +202,41 @@ public class Menu {
             usuario.exibirHistorico();
         } else {
             System.out.println("Usuário não encontrado.");
+        }
+    }
+
+    public void avaliarLivro() {
+        System.out.println("=== Avaliar Livro ===");
+        System.out.print("Nome do Usuário: ");
+        String nomeUsuario = scanner.nextLine();
+        System.out.print("Título do Livro: ");
+        String tituloLivro = scanner.nextLine();
+        System.out.print("Nota (1 a 5): ");
+        int nota = scanner.nextInt();
+        scanner.nextLine();  // Consumir quebra de linha
+        System.out.print("Comentário: ");
+        String comentario = scanner.nextLine();
+
+        Usuario usuario = buscarUsuario(nomeUsuario);
+        Livro livro = buscarLivro(tituloLivro);
+
+        if (usuario != null && livro != null) {
+            biblioteca.adicionarAvaliacao(usuario, livro, nota, comentario);
+            System.out.println("Avaliação adicionada com sucesso.");
+        } else {
+            System.out.println("Usuário ou livro não encontrado.");
+        }
+    }
+
+    public void exibirAvaliacoes() {
+        System.out.print("Título do Livro: ");
+        String tituloLivro = scanner.nextLine();
+        Livro livro = buscarLivro(tituloLivro);
+
+        if (livro != null) {
+            livro.exibirDetalhes();
+        } else {
+            System.out.println("Livro não encontrado.");
         }
     }
 
