@@ -3,6 +3,7 @@ package com.biblioteca.login;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ public class Biblioteca {
     private Scanner sc = new Scanner(System.in);
     private List<Livro> livros = new ArrayList<>();
     private List<Usuario> usuarios = new ArrayList<>();
+    private List<String> devolucoes = new ArrayList<String>();
 
     // Método para cadastrar um livro
     public void cadastrarLivro(Livro livro) {
@@ -51,9 +53,27 @@ public class Biblioteca {
 
     // Método para devolver um livro
     public void devolverLivro(Usuario usuario, Livro livro) {
-        livro.setDisponivel(true);
-        System.out.println("Livro " + livro.getTitulo() + " devolvido por " + usuario.getNome());
+        Date now = new Date();
+        try {
+            livro.setDisponivel(true);
+            System.out.println("Livro " + livro.getTitulo() + " devolvido por " + usuario.getNome());
+            devolucoes.add(usuario.getNome() + " devolveu: " + livro.getTitulo() + " às " + now);
+        } catch (Exception e) {
+            System.out.println("Erro ao devolver livro: " + e.getMessage());
+        }
     }
+
+    public void exibirDevolucoes() {
+        if (devolucoes.isEmpty()) {
+            System.out.println("Nenhuma devolução registrada.");
+        } else {
+            System.out.println("=== Lista de Devoluções ===");
+            for (String devolucao : devolucoes) {
+                System.out.println(devolucao);
+            }
+        }
+    }
+
 
     // Método para exibir todos os usuários cadastrados
     public void exibirUsuarios() {
