@@ -1,9 +1,6 @@
 package com.biblioteca.login;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Menu {
 
@@ -36,74 +33,61 @@ public class Menu {
             System.out.println("9. Exibir Avaliações de Livro");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
-    
-            int opcao = -1;
-            try {
-                opcao = scanner.nextInt();
-                scanner.nextLine();
-    
-                switch (opcao) {
-                    case 1:
-                        cadastrarLivro();
-                        break;
-                    case 2:
-                        cadastrarUsuario();
-                        break;
-                    case 3:
-                        emprestarLivro();
-                        break;
-                    case 4:
-                        devolverLivro();
-                        break;
-                    case 5:
-                        biblioteca.exibirLivros();
-                        pausar();
-                        break;
-                    case 6:
-                        exibirHistorico();
-                        pausar();
-                        break;
-                    case 7:
-                        biblioteca.exibirUsuarios();
-                        pausar();
-                        break;
-                    case 8:
-                        avaliarLivro();
-                        pausar();
-                        break;
-                    case 9:
-                        exibirAvaliacoes();
-                        pausar();
-                        break;
-                    case 0:
-                        System.out.println("Saindo...");
-                        return;  // Sai do programa
-                    default:
-                        System.out.println("Opção inválida.");
-                        pausar();
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Por favor, insira um número inteiro.");
-                scanner.nextLine();  // Limpa o buffer do scanner
-                pausar();
-            } catch (Exception e) {
-                System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
-                pausar();
+            int opcao = scanner.nextInt();
+            scanner.nextLine();  // Consumir a quebra de linha
+
+            switch (opcao) {
+                case 1:
+                    cadastrarLivro();
+                    break;
+                case 2:
+                    cadastrarUsuario();
+                    break;
+                case 3:
+                    emprestarLivro();
+                    break;
+                case 4:
+                    devolverLivro();
+                    break;
+                case 5:
+                    biblioteca.exibirLivros();
+                    pausar();
+                    break;
+                case 6:
+                    exibirHistorico();
+                    pausar();
+                    break;
+                case 7:
+                    biblioteca.exibirUsuarios();
+                    pausar();
+                    break;
+                case 8:
+                    avaliarLivro();
+                    pausar();
+                    break;
+                case 9:
+                    exibirAvaliacoes();
+                    pausar();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    return;  // Sai do programa
+                default:
+                    System.out.println("Opção inválida.");
+                    pausar();
+                    break;
             }
         }
     }
-    
+
     // Método para pausar a tela até que o usuário pressione Enter
     public void pausar() {
         System.out.println("Pressione Enter para continuar...");
         scanner.nextLine();
     }
-    
 
     // Métodos para cadastro e operações
     public void cadastrarLivro() {
-    try {
         System.out.println("=== Cadastrar Livro ===");
         System.out.print("Título: ");
         String titulo = scanner.nextLine();
@@ -111,29 +95,14 @@ public class Menu {
         String autor = scanner.nextLine();
         System.out.print("Categoria: ");
         String categoria = scanner.nextLine();
-
-        int ano = 0;
-        boolean entradaValida = false;
-        while (!entradaValida) {
-            try {
-                System.out.print("Ano: ");
-                ano = scanner.nextInt();
-                scanner.nextLine();
-                entradaValida = true;
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Por favor, insira um número inteiro para o ano.");
-                scanner.nextLine(); // Limpar a entrada inválida do scanner
-            }
-        }
+        System.out.print("Ano: ");
+        int ano = scanner.nextInt();
+        scanner.nextLine();  // Consumir quebra de linha
 
         Livro livro = new Livro(titulo, autor, categoria, ano);
         biblioteca.cadastrarLivro(livro);
-    } catch (Exception e) {
-        System.out.println("Erro ao cadastrar livro: " + e.getMessage());
+        pausar();
     }
-    pausar();
-}
-
 
     public void cadastrarUsuario() {
         try {
@@ -154,46 +123,21 @@ public class Menu {
             String bairro = scanner.nextLine();
             System.out.print("Cidade: ");
             String cidade = scanner.nextLine();
-            UnidadeFederal estado;
-        while (true) {
-            System.out.print("Estado (UF): ");
-            String estadoInput = scanner.nextLine();
-            try {
-                estado = UnidadeFederal.fromString(estadoInput);
-                break; // Estado válido, sai do loop
-            } catch (IllegalArgumentException e) {
-                System.out.println("Erro: Estado inválido. Tente novamente.");
-            }
-        }
+            System.out.print("Estado: ");
+            UnidadeFederal estado = UnidadeFederal.fromString(scanner.nextLine());
             System.out.print("CEP: ");
             String cep = scanner.nextLine();
             System.out.print("Referência: ");
             String referencia = scanner.nextLine();
-            String email;
-        while (true) {
             System.out.print("Email: ");
-            email = scanner.nextLine();
-            if (email.endsWith("@gmail.com")) {
-                break; // Email válido, sai do loop
-            } else {
-                System.out.println("Erro: O email deve terminar com '@gmail.com'. Tente novamente.");
-            }
-        }
+            String email = scanner.nextLine();
             System.out.print("Telefone: ");
             String telefone = scanner.nextLine();
             System.out.print("Login: ");
             String login = scanner.nextLine();
-            String senha;
-            while (true) {
-                System.out.print("Senha: ");
-                senha = scanner.nextLine();
-                System.out.println("Senha digitada: " + senha);  // Debug: Verificar a senha digitada
-                if (isSenhaValida(senha)) {
-                    break; // Senha válida, sai do loop
-                } else {
-                    System.out.println("Erro: A senha deve conter pelo menos uma letra maiúscula, 6 dígitos e um caractere especial.");
-                }
-            }
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+    
             Endereco endereco = new Endereco();
             endereco.setLogradouro(logradouro);
             endereco.setNumero(numero);
@@ -206,211 +150,117 @@ public class Menu {
 
             Usuario usuario = new Usuario(nome, cpf, dataNascimento, endereco, email, telefone, login, senha);
             biblioteca.cadastrarUsuario(usuario);
+            biblioteca.cadastrarUsuario(usuario);
+        System.out.println("Usuário cadastrado com sucesso.");
+    } catch (IllegalArgumentException e) {
+        System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+    } catch (Exception e) {
+        System.out.println("Erro inesperado: " + e.getMessage());
+    }
+    pausar();
+}
 
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro ao cadastrar usuário: \n" + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Erro inesperado: " + e.getMessage());
+    public void emprestarLivro() {
+        System.out.println("=== Emprestar Livro ===");
+        System.out.print("Nome do Usuário: ");
+        String nome = scanner.nextLine();
+        System.out.print("Título do Livro: ");
+        String titulo = scanner.nextLine();
+
+        Usuario usuario = buscarUsuario(nome);
+        Livro livro = buscarLivro(titulo);
+
+        if (usuario != null && livro != null) {
+            biblioteca.emprestarLivro(usuario, livro);
+        } else {
+            System.out.println("Usuário ou livro não encontrado.");
         }
         pausar();
     }
 
-    private boolean isSenhaValida(String senha) {
-        // Expressão regular para validar a senha
-        String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{6,}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(senha);
-        return matcher.matches();
-    }
-
-    public void emprestarLivro() {
-        try {
-            System.out.println("=== Emprestar Livro ===");
-            System.out.print("Nome do Usuário: ");
-            String nome = scanner.nextLine();
-            System.out.print("Título do Livro: ");
-            String titulo = scanner.nextLine();
-
-            Usuario usuario = buscarUsuario(nome);
-            Livro livro = buscarLivro(titulo);
-
-            if (usuario == null) {
-                System.out.println("Usuário não encontrado.");
-            } else if (livro == null) {
-                System.out.println("Livro não encontrado.");
-            } else if (!livro.isDisponivel()) {
-                System.out.println("O livro não está disponível para empréstimo.");
-            } else {
-                biblioteca.emprestarLivro(usuario, livro);
-                System.out.println("Empréstimo realizado com sucesso.");
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao realizar empréstimo: " + e.getMessage());
-        } finally {
-            pausar();
-        }
-    }
-
     public void devolverLivro() {
-        try {
-            System.out.println("=== Devolver Livro ===");
-            System.out.print("Nome do Usuário: ");
-            String nome = scanner.nextLine();
-            System.out.print("Título do Livro: ");
-            String titulo = scanner.nextLine();
-    
-            Usuario usuario = buscarUsuario(nome);
-            Livro livro = buscarLivro(titulo);
-    
-            if (usuario == null) {
-                System.out.println("Usuário não encontrado.");
-            } else if (livro == null) {
-                System.out.println("Livro não encontrado.");
-            } else if (!usuario.getHistoricoEmprestimos().contains(livro)) {
-                System.out.println("O livro não está no histórico de empréstimos deste usuário.");
-            } else {
-                biblioteca.devolverLivro(usuario, livro);
-                System.out.println("Devolução realizada com sucesso.");
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao realizar devolução: " + e.getMessage());
-        } finally {
-            pausar();
+        System.out.println("=== Devolver Livro ===");
+        System.out.print("Nome do Usuário: ");
+        String nome = scanner.nextLine();
+        System.out.print("Título do Livro: ");
+        String titulo = scanner.nextLine();
+
+        Usuario usuario = buscarUsuario(nome);
+        Livro livro = buscarLivro(titulo);
+
+        if (usuario != null && livro != null) {
+            biblioteca.devolverLivro(usuario, livro);
+        } else {
+            System.out.println("Usuário ou livro não encontrado.");
         }
+        pausar();
     }
 
     public void exibirHistorico() {
-        try {
-            System.out.println("=== Histórico de Empréstimos ===");
-            System.out.print("Nome do Usuário: ");
-            String nome = scanner.nextLine();
-    
-            Usuario usuario = buscarUsuario(nome);
-    
-            if (usuario != null) {
-                usuario.exibirHistorico();
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao exibir histórico: " + e.getMessage());
-        } finally {
-            pausar();
+        System.out.println("=== Histórico de Empréstimos ===");
+        System.out.print("Nome do Usuário: ");
+        String nome = scanner.nextLine();
+
+        Usuario usuario = buscarUsuario(nome);
+        if (usuario != null) {
+            usuario.exibirHistorico();
+        } else {
+            System.out.println("Usuário não encontrado.");
         }
     }
 
     public void avaliarLivro() {
-        try {
-            System.out.println("=== Avaliar Livro ===");
+        System.out.println("=== Avaliar Livro ===");
+        System.out.print("Nome do Usuário: ");
+        String nomeUsuario = scanner.nextLine();
+        System.out.print("Título do Livro: ");
+        String tituloLivro = scanner.nextLine();
+        System.out.print("Nota (1 a 5): ");
+        int nota = scanner.nextInt();
+        scanner.nextLine();  // Consumir quebra de linha
+        System.out.print("Comentário: ");
+        String comentario = scanner.nextLine();
 
-            Usuario usuario = null;
-            String nomeDoUsuario;
-            while (usuario == null) {
-            try {
-                System.out.print("Nome do Usuário: ");
-                nomeDoUsuario = scanner.nextLine();
-                usuario = buscarUsuario(nomeDoUsuario);
+        Usuario usuario = buscarUsuario(nomeUsuario);
+        Livro livro = buscarLivro(tituloLivro);
 
-                if (nomeDoUsuario == null) {
-                    System.out.println("Usuário não encontrado. Tente novamente.");
-                }
-            } catch (Exception e) {
-                System.out.println("Erro ao buscar usuário: " + e.getMessage());
-            }
-        }
-        Livro livro = null;
-        String tituloLivro;
-        while (livro == null) {
-            try{
-            System.out.print("Título do Livro: ");
-            tituloLivro = scanner.nextLine();
-            livro = buscarLivro(tituloLivro);
-
-            if (livro == null){
-                System.out.println("Livro nao encontrado. Tente novamente.");
-            }
-        }catch(Exception e){
-            System.out.println("Erro ao buscar livro: " + e.getMessage());
-        }
-    }
-
-            int nota = 0;
-            boolean notavaliada = false;
-            while(!notavaliada){
-            System.out.print("Nota (1 a 5): ");
-            try{
-            nota = scanner.nextInt();
-            scanner.nextLine();  // Consumir quebra de linha
-
-            // Verificar se a nota está dentro do intervalo permitido
-            if (nota < 1 || nota > 5) {
-                System.out.println("Nota inválida. A nota deve estar entre 1 e 5.");
-            }else{
-                notavaliada = true; //nota válida, sai do loop
-            }
-        }
-            catch(InputMismatchException e){
-                System.out.println("Entrada inválida. Por favor, insira um número inteiro para nota");
-                scanner.nextLine();
-            }
-        }
-            System.out.print("Comentário: ");
-            String comentario = scanner.nextLine();
-
-            if (usuario != null && livro != null) {
-                biblioteca.adicionarAvaliacao(usuario, livro, nota, comentario);
-                System.out.println("Avaliação adicionada com sucesso.");
-            } else {
-                System.out.println("Usuário ou livro não encontrado.");
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao avaliar livro: " + e.getMessage());
+        if (usuario != null && livro != null) {
+            biblioteca.adicionarAvaliacao(usuario, livro, nota, comentario);
+            System.out.println("Avaliação adicionada com sucesso.");
+        } else {
+            System.out.println("Usuário ou livro não encontrado.");
         }
     }
 
     public void exibirAvaliacoes() {
-        try {
-            System.out.print("Título do Livro: ");
-            String tituloLivro = scanner.nextLine();
-            Livro livro = buscarLivro(tituloLivro);
-    
-            if (livro != null) {
-                livro.exibirDetalhes(); // Verifique se este método está exibindo as avaliações corretamente
-            } else {
-                System.out.println("Livro não encontrado.");
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao exibir avaliações: " + e.getMessage());
+        System.out.print("Título do Livro: ");
+        String tituloLivro = scanner.nextLine();
+        Livro livro = buscarLivro(tituloLivro);
+
+        if (livro != null) {
+            livro.exibirDetalhes();
+        } else {
+            System.out.println("Livro não encontrado.");
         }
     }
 
     // Métodos auxiliares para buscar usuários e livros
     public Usuario buscarUsuario(String nome) {
-        try {
-            for (Usuario usuario : biblioteca.getUsuarios()) {
-                if (usuario.getNome().equalsIgnoreCase(nome)) {
-                    return usuario;
-                }
+        for (Usuario usuario : biblioteca.getUsuarios()) {
+            if (usuario.getNome().equalsIgnoreCase(nome)) {
+                return usuario;
             }
-            System.out.println("Usuário não encontrado.");
-            return null;  // Retorna null se o usuário não for encontrado
-        } catch (Exception e) {
-            System.out.println("Erro ao buscar usuário: " + e.getMessage());
-            return null;  // Retorna null em caso de erro
         }
+        return null;
     }
 
     public Livro buscarLivro(String titulo) {
-        try {
-            for (Livro livro : biblioteca.getLivros()) {
-                if (livro.getTitulo().equalsIgnoreCase(titulo)) {
-                    return livro;
-                }
+        for (Livro livro : biblioteca.getLivros()) {
+            if (livro.getTitulo().equalsIgnoreCase(titulo)) {
+                return livro;
             }
-            System.out.println("Livro não encontrado.");
-            return null;  // Retorna null se o livro não for encontrado
-        } catch (Exception e) {
-            System.out.println("Erro ao buscar livro: " + e.getMessage());
-            return null;  // Retorna null em caso de erro
         }
+        return null;
     }
 
     public void limparTela() {
