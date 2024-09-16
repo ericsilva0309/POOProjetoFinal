@@ -1,13 +1,18 @@
 package com.biblioteca.login;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter @Setter
-public class Usuario extends Pessoa {
+public class Usuario extends Pessoa{
     private List<Livro> historicoEmprestimos;
+
 
     public Usuario(String nome, String cpf, String dataNascimento, Endereco endereco, String email, String telefone, String login, String senha) {
         this.setNome(nome);
@@ -20,11 +25,7 @@ public class Usuario extends Pessoa {
         this.setSenha(senha);
     }
 
-    @Override
-    public String toString() {
-        return this.getNome();  // Retorna o nome do usuário
-    }
-
+    // Método para adicionar livro ao histórico de empréstimos
     public void exibirHistorico() {
         try {
             if (historicoEmprestimos == null || historicoEmprestimos.isEmpty()) {
@@ -39,6 +40,9 @@ public class Usuario extends Pessoa {
             System.out.println("Erro ao exibir histórico: " + e.getMessage());
         }
     }
+    
+    
+    
 
     public void adicionarEmprestimo(Livro livro) {
         if (historicoEmprestimos == null) {

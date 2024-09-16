@@ -31,7 +31,6 @@ public class Menu {
             System.out.println("7. Exibir Usuários");
             System.out.println("8. Avaliar Livro");
             System.out.println("9. Exibir Avaliações de Livro");
-            System.out.println("10. Exibir histórico de devoluções");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
@@ -68,10 +67,6 @@ public class Menu {
                     break;
                 case 9:
                     exibirAvaliacoes();
-                    pausar();
-                    break;
-                case 10:
-                    biblioteca.exibirDevolucoes();
                     pausar();
                     break;
                 case 0:
