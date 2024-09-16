@@ -18,8 +18,6 @@ public class Pessoa {
     private String login;
     private String senha;
     
-
-    
     public Pessoa(){
 
     }
