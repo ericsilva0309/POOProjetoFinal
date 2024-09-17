@@ -10,6 +10,7 @@ import java.util.List;
 public class Usuario extends Pessoa {
     private List<Livro> historicoEmprestimos;
     public static List<Usuario> listaDeUsuarios = new ArrayList<Usuario>();
+    Menu menu = new Menu();
 
     public Usuario(String nome, String cpf, String dataNascimento, Endereco endereco, String email, String telefone, String login, String senha) {
         this.setNome(nome);
@@ -87,7 +88,7 @@ public class Usuario extends Pessoa {
     }
 
     public void login(){
-        Menu.usuario();
+        menu.usuario();
 
     }
 
