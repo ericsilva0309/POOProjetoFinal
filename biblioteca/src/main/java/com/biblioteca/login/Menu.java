@@ -62,9 +62,8 @@ public class Menu {
                     pausar();
                     break;
                 case 9:
-                    System.out.println("biblioteca.exibirDevolucoes()");
-                    //AINDA TEM QUE SER IMPLEMENTADO
-                    //pausar();
+                    biblioteca.exibirDevolucoes();
+                    pausar();
                     break;
                 case 0:
                     System.out.println("Saindo...");
