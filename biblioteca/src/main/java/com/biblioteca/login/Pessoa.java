@@ -1,11 +1,15 @@
 package com.biblioteca.login;
 
+import java.util.ArrayList;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class Pessoa {
+public abstract class Pessoa implements Login {
+
+    public static ArrayList<Pessoa> listaDeUsuarios = new ArrayList<>();
 
     private int id;
     private String nome;
@@ -21,6 +25,10 @@ public class Pessoa {
 
     
     public Pessoa(){
+
+    }
+
+    public void login() {
 
     }
 

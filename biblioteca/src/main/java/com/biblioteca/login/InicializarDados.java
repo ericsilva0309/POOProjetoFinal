@@ -28,8 +28,8 @@ public class InicializarDados {
         endereco2.setCep("23456-789");
         endereco2.setReferencia("Ao lado da prefeitura");
 
-        // Criar alguns usuários
-        Usuario usuario1 = new Usuario(
+        // Criar alguns usuários e admins
+        Usuario admin1 = new Admin(
             "João Silva",
             "123.456.789-00",
             "01/01/1990",
@@ -37,10 +37,10 @@ public class InicializarDados {
             "joao.silva@email.com",
             "(11) 98765-4321",
             "joao",
-            "senha123"
-        );
+            "senha123");
+            Pessoa.listaDeUsuarios.add(admin1);
 
-        Usuario usuario2 = new Usuario(
+        Usuario admin2 = new Admin(
             "Maria Oliveira",
             "234.567.890-11",
             "02/02/1985",
@@ -48,10 +48,10 @@ public class InicializarDados {
             "maria.oliveira@email.com",
             "(21) 99876-5432",
             "maria",
-            "senha456"
-        );
+            "senha456");
+            Pessoa.listaDeUsuarios.add(admin2);
 
-        Usuario usuario3 = new Usuario(
+        Usuario usuario1 = new Usuario(
             "Carlos Pereira",
             "345.678.901-23",
             "15/03/1978",
@@ -59,10 +59,10 @@ public class InicializarDados {
             "carlos.pereira@email.com",
             "(31) 98765-4321",
             "carlos",
-            "senha789"
-        );
+            "senha789");
+            Pessoa.listaDeUsuarios.add(usuario1);
 
-        Usuario usuario4 = new Usuario(
+        Usuario usuario2 = new Usuario(
             "Ana Santos",
             "456.789.012-34",
             "22/07/1992",
@@ -70,14 +70,16 @@ public class InicializarDados {
             "ana.santos@email.com",
             "(11) 91234-5678",
             "ana",
-            "senha101"
-        );
+            "senha101");
+            Pessoa.listaDeUsuarios.add(usuario2);
+
+        
 
         // Adicionar os usuários à biblioteca
+        biblioteca.cadastrarUsuario(admin1);
+        biblioteca.cadastrarUsuario(admin2);
         biblioteca.cadastrarUsuario(usuario1);
         biblioteca.cadastrarUsuario(usuario2);
-        biblioteca.cadastrarUsuario(usuario3);
-        biblioteca.cadastrarUsuario(usuario4);
         
         // Criar e adicionar livros
         Livro livro1 = new Livro("O Alquimista", "Paulo Coelho", "Ficção", 1988);

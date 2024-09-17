@@ -9,6 +9,7 @@ import java.util.List;
 @Getter @Setter
 public class Usuario extends Pessoa {
     private List<Livro> historicoEmprestimos;
+    public static List<Usuario> listaDeUsuarios = new ArrayList<Usuario>();
 
     public Usuario(String nome, String cpf, String dataNascimento, Endereco endereco, String email, String telefone, String login, String senha) {
         this.setNome(nome);
@@ -54,4 +55,40 @@ public class Usuario extends Pessoa {
             System.out.println("Erro inesperado ao adicionar empréstimo: " + e.getMessage());
         }
     }
+
+    public boolean acessoPermitido(String login, String senha) {
+
+        if(login.equals(getLogin()) && senha.equals(getSenha())){
+            return true;
+        }
+        return false;
+    }
+
+    public static void imprimeListaDeUsuarios(){
+        
+        if(!Usuario.listaDeUsuarios.isEmpty()){
+            System.out.println("Lista de usuários:");
+            for(int i=0; i<Usuario.listaDeUsuarios.size(); i++) {
+                System.out.println( (i+1) + "- " + Usuario.listaDeUsuarios.get(i).getNome());
+            }
+        } else {
+            System.out.println("Não há usuários cadastrados.\n\n");
+        }
+
+    }
+
+    public Usuario() {
+
+    }
+
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
+
+    public void login(){
+        Menu.usuario();
+
+    }
+
 }
