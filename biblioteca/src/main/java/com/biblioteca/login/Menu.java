@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import java.util.InputMismatchException;
 
 public class Menu {
+    Emprestimo emprestimo = new Emprestimo(null, null, 0);
     Scanner scanner = new Scanner(System.in);
     Biblioteca biblioteca = new Biblioteca();   
     public void admin() throws InputMismatchException {
@@ -51,7 +52,8 @@ public class Menu {
                     pausar();
                     break;
                 case 6:
-                    exibirHistorico();
+                    Emprestimo.exibirHistoricoEmprestimos();
+                    pausar();
                     break;
                 case 7:
                     biblioteca.exibirUsuarios();
@@ -270,6 +272,8 @@ public class Menu {
             String nome = scanner.nextLine();
             System.out.print("Título do Livro: ");
             String titulo = scanner.nextLine();
+            System.out.print("Dias para devolução: ");
+            int diasParaDevolucao = scanner.nextInt();
 
             Usuario usuario = buscarUsuario(nome);
             Livro livro = buscarLivro(titulo);
@@ -281,7 +285,7 @@ public class Menu {
             } else if (!livro.isDisponivel()) {
                 System.out.println("O livro não está disponível para empréstimo.");
             } else {
-                biblioteca.emprestarLivro(usuario, livro);
+                emprestimo.registrarEmprestimo(usuario, livro, diasParaDevolucao);
                 System.out.println("Empréstimo realizado com sucesso.");
             }
         } catch (Exception e) {
@@ -301,17 +305,8 @@ public class Menu {
     
             Usuario usuario = buscarUsuario(nome);
             Livro livro = buscarLivro(titulo);
-    
-            if (usuario == null) {
-                System.out.println("Usuário não encontrado.");
-            } else if (livro == null) {
-                System.out.println("Livro não encontrado.");
-            } else if (!usuario.getHistoricoEmprestimos().contains(livro)) {
-                System.out.println("O livro não está no histórico de empréstimos deste usuário.");
-            } else {
-                biblioteca.devolverLivro(usuario, livro);
-                System.out.println("Devolução realizada com sucesso.");
-            }
+            
+            emprestimo.devolverLivro(usuario, livro);
         } catch (Exception e) {
             System.out.println("Erro ao realizar devolução: " + e.getMessage());
         } finally {
@@ -430,7 +425,6 @@ public class Menu {
                     return usuario;
                 }
             }
-            System.out.println("Usuário não encontrado.");
             return null;  // Retorna null se o usuário não for encontrado
         } catch (Exception e) {
             System.out.println("Erro ao buscar usuário: " + e.getMessage());

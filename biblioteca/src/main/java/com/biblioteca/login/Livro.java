@@ -88,8 +88,18 @@ public class Livro {
         }
     }
 
+    public static boolean isDisponivel(Livro livro) {
+        for (Emprestimo e : Emprestimo.emprestimos) {
+            if (e.getLivro().equals(livro)){
+                return e.isDevolvido();
+            }
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Título: " + titulo + ", Autor: " + autor + ", Categoria: " + categoria + ", Ano: " + ano;
     }
+
 }
