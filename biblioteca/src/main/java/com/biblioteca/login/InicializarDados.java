@@ -1,5 +1,5 @@
 package com.biblioteca.login;
-
+import java.time.LocalDateTime;
 public class InicializarDados {
 
     public static void inicializar(Biblioteca biblioteca) {
@@ -95,5 +95,13 @@ public class InicializarDados {
         biblioteca.cadastrarLivro(livro4);
         biblioteca.cadastrarLivro(livro5);
         biblioteca.cadastrarLivro(livro6);
-    }
+        Emprestimo emprestimo = new Emprestimo(usuario2, livro4, 3);
+
+        emprestimo.setDataEmprestimo(LocalDateTime.now().minusDays(10));
+        emprestimo.setDataLimite(LocalDateTime.now().minusDays(7));
+        // Emprestimo emprestimo = new Emprestimo(usuario2, livro3, 3);
+
+        // emprestimo.setDataEmprestimo(LocalDateTime.now().minusDays(10));
+        // emprestimo.setDataLimite(LocalDateTime.now().minusDays(7));
+}
 }

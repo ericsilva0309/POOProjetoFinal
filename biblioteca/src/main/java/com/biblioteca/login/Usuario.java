@@ -40,6 +40,31 @@ public class Usuario extends Pessoa {
         }
     }
 
+    public static void consultarLivrosPendentes() {
+        boolean encontrouPendentes = false;
+        System.out.println("\nLivros pendentes de devolução:");
+    
+        // Verifica se há livros pendentes
+        for (Emprestimo emprestimo : Emprestimo.emprestimos) {
+            try {
+                if (!emprestimo.isDevolvido()) {
+                    encontrouPendentes = true;
+                    System.out.println(emprestimo.getLivro().getTitulo() + " - Pendente");
+                }
+            } catch (Exception ex) {
+                // Captura e exibe exceções que possam ocorrer durante a verificação
+                System.out.println("Erro ao consultar livros pendentes: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+    
+        // Mensagem exibida apenas se nenhum livro pendente for encontrado
+        if (!encontrouPendentes) {
+            System.out.println("Nenhum livro está pendente de devolução.");
+        }
+    }
+    
+
     // Método para adicionar livro ao histórico de empréstimos
     public void adicionarEmprestimo(Livro livro) {
         try {

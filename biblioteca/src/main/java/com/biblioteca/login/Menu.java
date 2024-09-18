@@ -25,6 +25,7 @@ public class Menu {
             System.out.println("7. Exibir Usuários");
             System.out.println("8. Exibir Avaliações de Livro");
             System.out.println("9. Exibir histórico de devoluções");
+            System.out.println("10. Emitir Relatório de Livros Atrasados");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -67,6 +68,10 @@ public class Menu {
                     biblioteca.exibirDevolucoes();
                     pausar();
                     break;
+                case 10:
+                    Emprestimo.emitirRelatorioAtrasos();
+                    pausar();
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     return;  // Sai do programa
@@ -76,11 +81,10 @@ public class Menu {
                     break;
             }
         }catch (InputMismatchException e){
-           
-          
+
             System.out.println("\nDigite uma das opções válidas.\n");
         }
-            
+
         } while (opcao !=0);
 
     }
@@ -96,6 +100,7 @@ public class Menu {
             System.out.println("2. Exibir Livros Disponíveis");
             System.out.println("3. Avaliar Livro");
             System.out.println("4. Exibir Avaliações de Livro");
+            System.out.println("5. Consultar Livros Pendentes de Devolução");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -108,15 +113,23 @@ public class Menu {
             switch (opcao) {
                 case 1:
                     emprestarLivro();
+                    pausar();
                     break;
                 case 2:
                     biblioteca.exibirLivros();
+                    pausar();
                     break;
                 case 3:
                     avaliarLivro();
+                    pausar();
                     break;
                 case 4:
                     exibirAvaliacoes();
+                    pausar();
+                    break;
+                case 5:
+                    Usuario.consultarLivrosPendentes();
+                    pausar();
                     break;
                 case 0:
                     System.out.println("Saindo...");

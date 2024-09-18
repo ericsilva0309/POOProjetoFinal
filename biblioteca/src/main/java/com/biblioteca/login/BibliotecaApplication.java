@@ -12,13 +12,12 @@ public class BibliotecaApplication {
 			SpringApplication.run(BibliotecaApplication.class, args);
 
 			Biblioteca biblioteca = new Biblioteca();
-			InicializarDados.inicializar(biblioteca);
-			
-
+			InicializarDados.inicializar(biblioteca);			
+        
 			while(tentativas > 0){
 				Scanner leia = new Scanner(System.in);
 				System.out.println(" - Login - ");
-				System.out.print("Login: ");
+				System.out.print("Usuário: ");
 				String loginDigitado = leia.nextLine();
 				System.out.print("Senha: ");
 				String senhaDigitada = leia.nextLine();
