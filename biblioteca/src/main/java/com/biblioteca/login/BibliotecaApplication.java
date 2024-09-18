@@ -12,9 +12,41 @@ public class BibliotecaApplication {
 			SpringApplication.run(BibliotecaApplication.class, args);
 
 			Biblioteca biblioteca = new Biblioteca();
-			InicializarDados.inicializar(biblioteca);			
-        
+			InicializarDados.inicializar(biblioteca);
+
+
 			while(tentativas > 0){
+				System.out.println("       .--.                   .---.");
+				System.out.println("   .---|__|           .-.     |~~~|");
+				System.out.println(".--|===|--|_          |_|     |~~~|--.");
+				System.out.println("|  |===|  |'\\     .---!~|  .--|   |--|");
+				System.out.println("|%%|   |  |.'\\    |===| |--|%%|   |  |");
+				System.out.println("|%%|   |  |\\.'\\   |   | |__|  |   |  |");
+				System.out.println("|  |   |  | \\  \\  |===| |==|  |   |  |");
+				System.out.println("|  |   |__|  \\.'\\ |   |_|__|  |~~~|__|");
+				System.out.println("|  |===|--|   \\.'\\|===|~|--|%%|~~~|--|");
+				System.out.println("^--^---'--^    `-'`---^-^--^--^---'--'");
+		
+				System.out.println("          ,..........   ..........,         ");
+				System.out.println("     ,..,'          '.'          ',..,     ");
+				System.out.println("    ,' ,'            :            ', ',    ");
+				System.out.println("   ,' ,'             :             ', ',   ");
+				System.out.println("  ,' ,'              :              ', ',  ");
+				System.out.println(" ,' ,'............., : ,.............', ', ");
+				System.out.println(",'  '............   '.'   ............'  ',");
+				System.out.println(" '''''''''''''''''';''';'''''''''''''''''' ");
+				System.out.println("                    '''                      ");
+
+				System.out.println("╔════════════════════════════════════════════════════╗");
+				System.out.println("║                                                    ║");
+				System.out.println("║            ╔═══╗ BEM-VINDO À BIBLIOTECA            ║");
+				System.out.println("║            ║ B ║ LOGIN                             ║");
+				System.out.println("║            ╚═══╝                                   ║");
+				System.out.println("║                                                    ║");
+				System.out.println("║         Por favor, insira suas credenciais         ║");
+				System.out.println("║                                                    ║");
+				System.out.println("╚════════════════════════════════════════════════════╝");
+				
 				Scanner leia = new Scanner(System.in);
 				System.out.println(" - Login - ");
 				System.out.print("Usuário: ");

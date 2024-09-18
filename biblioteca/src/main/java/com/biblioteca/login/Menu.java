@@ -15,19 +15,24 @@ public class Menu {
     
         int opcao = 20;
         do {
-            System.out.println("==== Sistema de Biblioteca ====");
-            System.out.println("1. Cadastrar Livro");
-            System.out.println("2. Cadastrar Usuário");
-            System.out.println("3. Emprestar Livro");
-            System.out.println("4. Devolver Livro");
-            System.out.println("5. Exibir Livros Disponíveis");
-            System.out.println("6. Exibir Histórico de Empréstimos");
-            System.out.println("7. Exibir Usuários");
-            System.out.println("8. Exibir Avaliações de Livro");
-            System.out.println("9. Exibir histórico de devoluções");
-            System.out.println("10. Emitir Relatório de Livros Atrasados");
-            System.out.println("0. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.println(   "╔════════════════════════════════════════╗");
+        System.out.println(   "║             Menu Atendente             ║");
+        System.out.println(   "╚════════════════════════════════════════╝");
+        System.out.println(" Escolha uma opção abaixo");
+        System.out.println("╔════════════════════════════════════════╗" );
+        System.out.println("║ 1 - Cadastrar Livro                    ║" );
+        System.out.println("║ 2 - Cadastrar Usuário                  ║" );
+        System.out.println("║ 3 - Emprestar Livro                    ║" );
+        System.out.println("║ 4 - Devolver Livro                     ║" );
+        System.out.println("║ 5 - Exibir Livros Disponíveis          ║" );
+        System.out.println("║ 6 - Exibir Histórico de Empréstimos    ║" );
+        System.out.println("║ 7 - Exibir Usuários                    ║" );
+        System.out.println("║ 8 - Exibir Avaliações de Livro         ║" );
+        System.out.println("║ 9 - Exibir histórico de devoluções     ║" );
+        System.out.println("║ 10 - Exibir relatório                  ║" );
+        System.err.println("║ 0 - Sair                               ║" );
+        System.out.println("╚════════════════════════════════════════╝" );
+        System.out.print("Escolha uma opção: ");
 
             Scanner leia = new Scanner(System.in);
 
